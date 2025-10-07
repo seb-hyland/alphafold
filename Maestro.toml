@@ -1,0 +1,36 @@
+[executor.default]
+type = "Local"
+staging_mode = "Copy"
+
+[executor.slurm]
+type = "Slurm"
+staging_mode = "Copy"
+modules = ["gcc", "cuda", "apptainer"]
+account = "st-shallam-1-gpu"
+nodes = 1
+tasks = 1
+cpus = 12
+memory = { type = "per_node", amount = 64000 }
+gpus = 1
+time = { hours = 6 }
+
+[args]
+# Scratch directory which Apptainer will use for caching
+scratch_dir = "/scratch/st-shallam-1/igem-2025/structural-analysis"
+# Path to AlphaFold SIF
+sif_path = "/arc/project/st-shallam-1/igem-2025/structural-analysis/alphafold/alphafold.sif"
+# Path to AlphaFold database
+db_dir = "/cvmfs/bio.data.computecanada.ca/content/databases/Core/alphafold2_dbs/2024_01"
+
+[args]
+# predict OR align
+mode = "predict"
+
+[inputs]
+# A list of input FASTAs to generate structures for
+input_files = []
+# A list of input PDBs to align
+input_pdbs = []
+# A list of directories which contain one or more PDBs to align against input_files
+# Must be the same length as input_files
+alignment_dirs = []

@@ -1,0 +1,10 @@
+# Runs PyMOL to align a reference structure against one or more test structures
+["src/main.rs:122:17"]
+executor = "direct"
+deps = ["pymol"]
+
+# Runs AlphaFold to predict the structure of a FASTA file
+["src/main.rs:143:17"]
+executor = "slurm"
+deps = ["apptainer"]
+
